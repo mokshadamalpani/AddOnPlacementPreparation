@@ -1,16 +1,14 @@
 #include <stdio.h>
-
-void occ(int *a,int n)
+void occ(int *a,long int n)
 {
-	int lastdig;
+	long int lastdig;
 	while(n != 0)
 	{
 		lastdig=n%10;
 		n/=10;
-		a[lastdig]++;
+		a[lastdig]+=1;
 	}
 }
-
 int main(void)
 {
 	long int n=0;
