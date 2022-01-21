@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -67,7 +68,18 @@ void display(struct tree *root)
 	display(root->left);
 }
 
-void search(int len,char known,struct tree *root,int pos)
+int matching(char temp[10],int pos[10],char known[10],int cnt_letter)
+{
+    int index;
+    for(index=0;index<cnt_letter;index++)
+    {
+        if(temp[pos[index]-1]!=known[index])
+        return 0;
+    }
+    return 1;
+}
+
+void search(int len,char known[10],struct tree *root,int pos[10],int cnt_letter)
 {
     char temp[10];
     if(root==NULL)
@@ -77,18 +89,18 @@ void search(int len,char known,struct tree *root,int pos)
     if(root->len==len)
     {
         strcpy(temp,root->word);
-        if(temp[pos-1]==known)
+        if(matching(temp,pos,known,cnt_letter))
         {
             printf("%s\n",root->word);
         }
     }
     if(len>=root->len)
     {
-        search(len,known,root->right,pos);
+        search(len,known,root->right,pos,cnt_letter);
     }
     else
     {
-        search(len,known,root->left,pos);
+        search(len,known,root->left,pos,cnt_letter);
     }
     
 }
@@ -96,8 +108,8 @@ void search(int len,char known,struct tree *root,int pos)
 void main()
 {
 	char words[25][15]={"apple","start","bat","banana","basic","come","came","daily","egg","congrats","monkey","south","dogs","actor","pineapple","mostly","doors","watch","roof","walks","root","flower","flasks","bucket","steps"};
-	int size=sizeof(words) / sizeof(words[0]),word,length_word,ch,pos;
-	char known;
+  char letters[10];
+	int size=sizeof(words) / sizeof(words[0]),word,length_word,ch,pos[10],cnt_letter;
 	struct tree *temp=NULL,*root=NULL;
 	for(word=0;word<size;word++)
 	{
@@ -112,12 +124,17 @@ void main()
 	}
 	printf("\nEnter Length of Word : ");
 	scanf("%d",&length_word);
-	printf("\nEnter A Letter Which You Know From Your  : ");
-	scanf("%c",&known);
-	scanf("%c",&known);
-	printf("\nEnter Position of That Letter : ");
-	scanf("%d",&pos);
-	search(length_word,known,root,pos);
-	printf("\nSearching Finished !!!");
+	printf("\n Enter How Many Letters Do Know From That Word : ");
+	scanf("%d",&cnt_letter);
+	for(word=0;word<cnt_letter;word++)
+	{
+      printf("\nEnter A Letter Which You Know From Your Word : ");
+      scanf("%c",&letters[word]);
+      scanf("%c",&letters[word]);
+	    printf("\nEnter Position of That Letter : ");
+	    scanf("%d",&pos[word]);
+	}
+	    search(length_word,letters,root,pos,cnt_letter);
+	    printf("\nSearching Finished !!!");
 	
 }
