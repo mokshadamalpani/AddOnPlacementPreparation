@@ -124,14 +124,14 @@ void main()
 	}
 	printf("\nEnter Length of Word : ");
 	scanf("%d",&length_word);
-	printf("\n Enter How Many Letters Do Know From That Word : ");
+	printf("\n Enter Number of charaters Do Know From That Word : ");
 	scanf("%d",&cnt_letter);
 	for(word=0;word<cnt_letter;word++)
 	{
-      printf("\nEnter A Letter Which You Know From Your Word : ");
+      printf("\nEnter a Charater Which You Know From Your Word : ");
       scanf("%c",&letters[word]);
       scanf("%c",&letters[word]);
-	    printf("\nEnter Position of That Letter : ");
+	    printf("\nEnter Position of That Charater : ");
 	    scanf("%d",&pos[word]);
 	}
 	    search(length_word,letters,root,pos,cnt_letter);
